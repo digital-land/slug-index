@@ -3,12 +3,17 @@ include makerules/makerules.mk
 
 # DATASET_PATH := data/dataset.csv
 # DATASET := brownfield-land
+#
+.PHONY: index collect
 
 collect:
 	mkdir -p data
 	wget -O data/brownfield-land.csv https://raw.githubusercontent.com/digital-land/brownfield-land-collection/main/dataset/brownfield-land.csv
 	wget -O data/conservation-area.csv https://raw.githubusercontent.com/digital-land/conservation-area-collection/main/dataset/conservation-area.csv
-	wget -O data/organisation.csv https://github.com/digital-land/organisation-dataset/blob/main/collection/organisation.csv
+	wget -O data/organisation.csv https://github.com/digital-land/organisation-dataset/raw/main/collection/organisation.csv
+
+index:
+	python slug-indexer/index.py
 
 # local: clean
 # 	digital-land --pipeline-name $(DATASET) render --dataset-path $(DATASET_PATH) --local
