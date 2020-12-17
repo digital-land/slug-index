@@ -7,9 +7,9 @@ ca_dataset = "data/conservation-area.csv"
 lp_dataset = "data/local-plan.csv"
 
 datasets = [
-    (ca_dataset, "conservation-area", "Conservation Area"),
-    (bfl_dataset, "brownfield-land", "Brownfield Land"),
-    (lp_dataset, "local-plan", "Local Plan"),
+    (ca_dataset, "conservation-area", "name"),
+    (bfl_dataset, "brownfield-land", "site"),
+    (lp_dataset, "local-plan", "name"),
 ]
 
 output_file = "index/slug-index.csv"
@@ -32,7 +32,7 @@ writer = csv.DictWriter(open(output_file, "w"), fieldnames=output_fields)
 writer.writeheader()
 
 try:
-    for dataset_csv, dataset, dataset_name in datasets:
+    for dataset_csv, dataset, name_field in datasets:
         for row in csv.DictReader(open(dataset_csv)):
             if "organisations" in row:
                 orgs = row["organisations"].split(";")
@@ -47,7 +47,7 @@ try:
                     "organisation-name": organisation[org]["name"],
                     "organisaton-slug": f"organisation/{org.replace(':', '/')}",
                     "dataset": dataset,
-                    "dataset-name": dataset_name,
+                    "dataset-name": row[name_field],
                     "dataset-slug": row["slug"],
                 }
                 if not out_row["dataset-slug"]:
