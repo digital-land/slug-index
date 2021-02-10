@@ -14,6 +14,7 @@ collect:
 	wget -O data/organisation.csv https://github.com/digital-land/organisation-dataset/raw/main/collection/organisation.csv
 	curl -qsL https://raw.githubusercontent.com/digital-land/development-policy/main/dataset/development-policy.csv > data/development-policy.csv
 	curl -qsL https://raw.githubusercontent.com/digital-land/development-plan-document-collection/main/dataset/development-plan-document.csv > data/development-plan-document.csv 
+	curl -qsL https://raw.githubusercontent.com/digital-land/development-plan-type/main/dataset/development-plan-type.csv > data/development-plan-type.csv 
 
 index:
 	python slug-indexer/index.py
